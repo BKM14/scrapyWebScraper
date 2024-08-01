@@ -34,7 +34,7 @@ class CuisinesSpider(scrapy.Spider):
         data = soup.find_all('a')
         # File to save resources
         filename = urlparse(response.url).netloc + ".txt"
-        textfile = open("/home/balaji/Desktop/webScraper/webScraper/htmlLinkFiles/" + filename, 'w')
+        textfile = open("./webScraper/htmlLinkFiles/" + filename, 'w')
         for tag in data:
             textfile.write(response.urljoin(str(tag['href'])) + "\n")
         textfile.close()

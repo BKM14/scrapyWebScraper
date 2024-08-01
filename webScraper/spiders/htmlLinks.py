@@ -30,7 +30,7 @@ class LinksSpider(scrapy.Spider):
         for link in self.start_urls:
             filename = urlparse(link).netloc + ".txt"
             try:
-                textfile = open("/home/balaji/Desktop/webScraper/webScraper/htmlLinkFiles/" + filename, 'r')
+                textfile = open("./webScraper/htmlLinkFiles/" + filename, 'r')
                 for url in textfile.readlines():
                     request = scrapy.Request(url=url, callback=self.parse, headers=self.headers)
                     yield request
@@ -39,7 +39,7 @@ class LinksSpider(scrapy.Spider):
 
     def parse(self, response):
         soup = BeautifulSoup(response.text, "html5lib")
-        textfile = open("/home/balaji/Desktop/webScraper/webScraper/htmlContentFiles/" + str(self.count) + ".txt", 'w')
+        textfile = open("./webScraper/htmlContentFiles/" + str(self.count) + ".txt", 'w')
         text = str(soup.find('body'))
         text = re.sub(r'<.*?>', '', text)
         text = re.sub(r'\n+', '\n', text)

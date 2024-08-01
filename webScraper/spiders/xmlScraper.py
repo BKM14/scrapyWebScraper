@@ -38,7 +38,7 @@ class XmlSpider(scrapy.Spider):
     def parse(self, response):
         soup = BeautifulSoup(response.text, 'lxml')
         filename = urlparse(response.url).netloc + ".txt"
-        textfile = open("/home/balaji/Desktop/webScraper/webScraper/xmlContentFiles/" + filename, "a")
+        textfile = open("./webScraper/xmlContentFiles/" + filename, "a")
         textfile.write(str(soup) + "\n\n\n")
         textfile.write("--------------------\n")
         textfile.close()
