@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 import re
 
+
 class LinksSpider(scrapy.Spider):
     name = "htmlLinks"
     count = 0
@@ -30,16 +31,17 @@ class LinksSpider(scrapy.Spider):
         for link in self.start_urls:
             filename = urlparse(link).netloc + ".txt"
             try:
-                textfile = open("./webScraper/htmlLinkFiles/" + filename, 'r')
+                textfile = open("./webScraper/data/htmlLinkFiles/" + filename, 'r')
                 for url in textfile.readlines():
                     request = scrapy.Request(url=url, callback=self.parse, headers=self.headers)
                     yield request
-            except:
+            except Exception as e:
                 print('file not found')
+                print(e)
 
-    def parse(self, response):
+    def parse(self, response, **kwargs):
         soup = BeautifulSoup(response.text, "html5lib")
-        textfile = open("./webScraper/htmlContentFiles/" + str(self.count) + ".txt", 'w')
+        textfile = open("./webScraper/data/htmlContentFiles/" + str(self.count) + ".txt", 'w')
         text = str(soup.find('body'))
         text = re.sub(r'<.*?>', '', text)
         text = re.sub(r'\n+', '\n', text)

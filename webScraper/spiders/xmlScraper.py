@@ -32,13 +32,13 @@ class XmlSpider(scrapy.Spider):
 
     def start_requests(self):
         for url in self.start_urls:
-            request = scrapy.Request(url = url, callback=self.parse, headers=self.headers)
+            request = scrapy.Request(url=url, callback=self.parse, headers=self.headers)
             yield request
 
-    def parse(self, response):
+    def parse(self, response, **kwargs):
         soup = BeautifulSoup(response.text, 'lxml')
         filename = urlparse(response.url).netloc + ".txt"
-        textfile = open("./webScraper/xmlContentFiles/" + filename, "a")
+        textfile = open("./webScraper/data/xmlContentFiles/" + filename, "a")
         textfile.write(str(soup) + "\n\n\n")
         textfile.write("--------------------\n")
         textfile.close()
