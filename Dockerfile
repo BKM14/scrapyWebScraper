@@ -1,9 +1,11 @@
-FROM python:3.9.19-alpine3.20
+FROM python
 
-WORKDIR ./
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip install -r requirements.txt
 
 COPY . .
-
-RUN pip install requirements.txt
 
 CMD ["./run.sh"]
