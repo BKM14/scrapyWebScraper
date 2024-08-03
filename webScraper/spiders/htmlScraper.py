@@ -2,7 +2,8 @@ import scrapy
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 
-class CuisinesSpider(scrapy.Spider):
+
+class HomeSpider(scrapy.Spider):
     name = "htmlScraper"
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0',
@@ -29,14 +30,16 @@ class CuisinesSpider(scrapy.Spider):
             request = scrapy.Request(url=url, callback=self.parse, headers=self.headers)
             yield request
 
-    def parse(self, response):
+    def parse(self, response, **kwargs):
         soup = BeautifulSoup(response.text, "html5lib")
         data = soup.find_all('a')
-        # File to save resources
         filename = urlparse(response.url).netloc + ".txt"
-        textfile = open("/home/balaji/Desktop/webScraper/webScraper/htmlLinkFiles/" + filename, 'w')
-        for tag in data:
-            textfile.write(response.urljoin(str(tag['href'])) + "\n")
-        textfile.close()
-        print("saved")
-
+        textfile = open("./webScraper/data/htmlLinkFiles/" + filename, 'w')
+        try:
+            for tag in data:
+                textfile.write(response.urljoin(str(tag['href'])) + "\n")
+            textfile.close()
+            print("saved")
+        except Exception as e:
+            print("Error occurred!")
+            print(e)

@@ -1,0 +1,10 @@
+services:
+  webscraper:
+    build: .
+    volumes:
+      - scrapedata:/app/webScraper/data
+    ports:
+      - 8000:8000
+    command: sh -c "./run.sh && tail -f /dev/null"
+volumes:
+  scrapedata:
