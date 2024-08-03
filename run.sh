@@ -1,5 +1,9 @@
 #!/bin/sh
 
+rm -rf ./webScraper/data/htmlContentFiles
+rm -rf ./webScraper/data/htmlLinkFiles
+rm -rf ./webScraper/data/xmlContentFiles
+
 mkdir -p ./webScraper/data/htmlContentFiles
 mkdir -p ./webScraper/data/htmlLinkFiles
 mkdir -p ./webScraper/data/xmlContentFiles
