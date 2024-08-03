@@ -15,7 +15,6 @@ class LinksSpider(scrapy.Spider):
         "https://www.expresspharma.in/",
         "https://www.pmlive.com/",
         "https://firstwordpharma.com/",
-        "https://www.reuters.com/business/healthcare-pharmaceuticals",
         "https://pharmanewsintel.com/"
     ]
 
