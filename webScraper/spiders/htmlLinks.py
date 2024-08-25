@@ -73,6 +73,7 @@ class LinksSpider(scrapy.Spider):
                 tagElements.decompose()
 
         textfile.write(clean_and_merge_text(text.get_text()))
+
         self.count += 1
         textfile.close()
         print('content saved')
