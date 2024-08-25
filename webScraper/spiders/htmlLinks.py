@@ -4,6 +4,31 @@ from urllib.parse import urlparse
 import re
 
 
+def clean_and_merge_text(text):
+    segments = re.split(r'(\.)', text)
+    cleaned_segments = []
+
+    current_segment = ""
+
+    for segment in segments:
+        segment = re.sub(r'\n+', '\n', segment)
+        segment = re.sub(r'[ \t]+', ' ', segment)
+
+        current_segment += segment
+
+        if segment == '.':
+            if current_segment.strip():
+                cleaned_segments.append(current_segment.strip())
+                current_segment = ""
+
+    cleaned_text = '. '.join(cleaned_segments)
+
+    if not cleaned_text.endswith('.'):
+        cleaned_text += '.'
+
+    return cleaned_text
+
+
 class LinksSpider(scrapy.Spider):
     name = "htmlLinks"
     count = 0
@@ -41,11 +66,12 @@ class LinksSpider(scrapy.Spider):
     def parse(self, response, **kwargs):
         soup = BeautifulSoup(response.text, "html5lib")
         textfile = open("./webScraper/data/htmlContentFiles/" + str(self.count) + ".txt", 'w')
-        text = str(soup.find('body'))
-        text = re.sub(r'<.*?>', '', text)
-        text = re.sub(r'\n+', '\n', text)
-        text = re.sub(r'[ \t]+', ' ', text.strip())
-        textfile.write(text)
+        text = soup.find('body')
+        for tag in ['script', 'path', 'style']:
+            for tagElements in text.find_all(tag):
+                tagElements.decompose()
+
+        textfile.write(clean_and_merge_text(text.get_text()))
         self.count += 1
         textfile.close()
         print('content saved')
