@@ -22,6 +22,7 @@ def clean_and_merge_text(text):
                 current_segment = ""
 
     cleaned_text = '. '.join(cleaned_segments)
+    cleaned_text = re.sub(r'[^\x00-\x7F]+', '', cleaned_text)
 
     if not cleaned_text.endswith('.'):
         cleaned_text += '.'
@@ -37,10 +38,10 @@ class LinksSpider(scrapy.Spider):
         "https://www.worldpharmanews.com/",
         "https://pharmatimes.com/news/",
         "https://www.worldpharmaceuticals.net/news/",
-        "https://www.expresspharma.in/",
-        "https://www.pmlive.com/",
+        "https://health.economictimes.indiatimes.com/news/pharma",
+        "https://pmlive.com/",
         "https://firstwordpharma.com/",
-        "https://pharmanewsintel.com/"
+        "https://www.techtarget.com/pharmalifesciences"
     ]
 
     headers = {
@@ -67,7 +68,7 @@ class LinksSpider(scrapy.Spider):
         soup = BeautifulSoup(response.text, "html5lib")
         textfile = open("./webScraper/data/htmlContentFiles/" + str(self.count) + ".txt", 'w')
         text = soup.find('body')
-        for tag in ['script', 'path', 'style']:
+        for tag in ['script', 'path', 'style', 'a']:
             for tagElements in text.find_all(tag):
                 tagElements.decompose()
 

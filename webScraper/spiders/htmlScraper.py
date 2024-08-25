@@ -18,10 +18,10 @@ class HomeSpider(scrapy.Spider):
         "https://www.worldpharmanews.com/",
         "https://pharmatimes.com/news/",
         "https://www.worldpharmaceuticals.net/news/",
-        "https://www.expresspharma.in/",
-        "https://www.pmlive.com/",
+        "https://health.economictimes.indiatimes.com/news/pharma",
+        "https://pmlive.com/",
         "https://firstwordpharma.com/",
-        "https://pharmanewsintel.com/"
+        "https://www.techtarget.com/pharmalifesciences"
     ]
 
     def start_requests(self):
