@@ -1,0 +1,43 @@
+{
+        "www.worldpharmanews.com" : {
+            "type" : "static",
+            "article_path" : "//*[@class='btn btn-readmore']/@href",
+            "next" : "//a[@aria-label='Go to next page']/@href"
+        },
+        "pharmatimes.com" : {
+            "type" : "static",
+            "article_path" : "//*[@class='dg_bm_title']//a/@href",
+            "next" : "//*[@class='nav-link nav-link-prev']//a/@href"
+        },
+        "www.worldpharmaceuticals.net" : {
+            "type" : "dynamic",
+            "next" : "//a[@id='pagination_showmore_category_btn']",
+            "article_path" : "//*[@class='cell large-4']//h3//a/@href",
+            "delay" : 0
+
+        },
+        "health.economictimes.indiatimes.com" : {
+            "type" : "dynamic",
+            "article_path" : "//*[@class='desc']//h3//a/@href",
+            "next" : "//a[@id='cat_list_load_more']",
+            "delay" : 0.5
+        },
+        "www.fiercepharma.com" : {
+            "type" : "dynamic",
+            "next" : "//*[@class='extended-load d-inline-block']",
+            "article_path" : "//*[@class='element-title small']//a[@data-v-6c5c0ed4]",
+            "delay" : 0
+
+        },
+        "pharmaceutical-journal.com" : {
+            "type" : "static",
+            "article_path" : "//*[@class='article-teaser']//a/@href",
+            "next" : "//a[@aria-label='Next']/@href"
+
+        },
+        "www.biopharmadive.com" : {
+            "type" : "static",
+            "article_path" : "//h3[@class='feed__title feed__title--display']//a/@href",
+            "next" : "//a[@class='button button--soft']/@href"
+        }
+}
